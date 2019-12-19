@@ -124,7 +124,6 @@ def main():
     t1_diff = compare_trees(t1_json, t2_json)
     t2_diff = compare_trees(t2_json, t1_json)
 
-    print(t2_diff)
     if len(t1_diff) > 0:
         if pretty:
             print("Tree 1 is missing the following elements:")
