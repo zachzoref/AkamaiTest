@@ -1,13 +1,14 @@
 #!/usr/bin/python3
+
 import argparse
 import functions
 import json
 
 def init_args():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("tree1", help="The first tree file name",
+    parser = argparse.ArgumentParser("")
+    parser.add_argument("tree1", help="The first tree file name. By default it looks for a file called tree1.txt in the pwd",
                         default="tree1.txt", nargs="?")
-    parser.add_argument("tree2", help="The second tree file name",
+    parser.add_argument("tree2", help="The second tree file name. By default it looks for a file called tree2.txt in the pwd",
                         default="tree2.txt", nargs="?")
     parser.add_argument("-p", "--pretty",
                         help="Pretty print the diff between the trees",
@@ -23,6 +24,7 @@ If not, it returns the exact difference between similar elements.
 The function works by recursively checking dictionaries containing more lists,
 in order to get to the final element which is not equal to the original,
 and then returns the keys which points to the difference, step by step, backwards.
+It consists of O(n) time complexity, and the overall program is O(m*n).
 """
 def search_in(tree, element):
     # Initiating the necessary variables
@@ -131,7 +133,7 @@ def main():
 
         t1_file_content = "Tree 1 missing \n" + json.dumps(t1_diff, indent=4, sort_keys=True)
         functions.t_write(t1_file_content, "tree1_diff.txt")
-        print("The diff comparison between tree2 to tree1 was exported to the file tree1_diff.txt successfully")
+        print("The diff comparison between tree2 to tree1 was exported to the file tree1_diff.txt successfully\n")
 
     if len(t1_diff) > 0:
         if pretty:
@@ -140,7 +142,7 @@ def main():
 
         t2_file_content = "Tree 2 missing \n" + json.dumps(t2_diff, indent=4, sort_keys=True)
         functions.t_write(t2_file_content, "tree2_diff.txt")
-        print("The diff comparison between tree1 to tree2 was exported to the file tree2_diff.txt successfully")
+        print("The diff comparison between tree1 to tree2 was exported to the file tree2_diff.txt successfully\n")
 
 
 if __name__ == "__main__":
